@@ -1,1 +1,1 @@
-print("whitelisted hooray!")
+print("LOOOL")
