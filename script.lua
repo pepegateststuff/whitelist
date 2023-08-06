@@ -11,6 +11,8 @@ local Window = Library:CreateWindow({
 })
 
 _G.loaded = false
+_G.movement = false
+_G.trinketEsp = false
 
 -- You do not have to set your tabs & groups up this way, just a prefrence.
 local Tabs = {
@@ -24,8 +26,6 @@ local Tabs = {
 local currentCamera = workspace.CurrentCamera
 local rs = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
-
-_G.trinketEsp = false
 
 local fallionEsp = true
 local houseEsp = true
@@ -54,56 +54,61 @@ local function trinketesp(trinket)
 
     local update
     update = game:GetService("RunService").RenderStepped:Connect(function()
-        if trinket and trinket:FindFirstChild("Handle") and _G.trinketEsp then
-            local vector, onscreen = currentCamera:WorldToViewportPoint(trinket.Handle.Position)
-            if onscreen then
-                text.Visible = true
-                text.Text = trinket.Handle.Parent.Name
-                text.Position = Vector2.new(vector.X, vector.Y)
-
-                text.Color = Color3.fromRGB(255, 0, 0)
-
-                if trinket.Name == "Scroll" then
-                    text.Text = "Scroll"
-                    text.Color = Color3.fromRGB(255, 250, 0)
-                end
-
-                if trinket.Name == "Amulet" then
-                    text.Visible = false
-                    text.Text = "Amulet"
-                    text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
-                end
-
-                if trinket.Name == "Emerald" then
+        if _G.trinketEsp then
+            if trinket and trinket:FindFirstChild("Handle") then
+                local vector, onscreen = currentCamera:WorldToViewportPoint(trinket.Handle.Position)
+                if onscreen then
                     text.Visible = true
-                    text.Text = "Emerald"
-                    text.Color = Color3.fromRGB(0, 255, 0)
-                end
+                    text.Text = trinket.Handle.Parent.Name
+                    text.Position = Vector2.new(vector.X, vector.Y)
 
-                if trinket.Name == "Ice Essence" then
-                    text.Text = "Ice Essence"
-                    text.Color = Color3.fromRGB(0, 255, 255)
-                end
+                    text.Color = Color3.fromRGB(255, 0, 0)
 
-                if trinket.Name == "Old Fragment" then
+                    if trinket.Name == "Scroll" then
+                        text.Text = "Scroll"
+                        text.Color = Color3.fromRGB(255, 250, 0)
+                    end
+
+                    if trinket.Name == "Amulet" then
+                        text.Visible = false
+                        text.Text = "Amulet"
+                        text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
+                    end
+
+                    if trinket.Name == "Emerald" then
+                        text.Visible = true
+                        text.Text = "Emerald"
+                        text.Color = Color3.fromRGB(0, 255, 0)
+                    end
+
+                    if trinket.Name == "Ice Essence" then
+                        text.Text = "Ice Essence"
+                        text.Color = Color3.fromRGB(0, 255, 255)
+                    end
+
+                    if trinket.Name == "Old Fragment" then
+                        text.Visible = false
+                        text.Text = "Old Fragment"
+                        text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
+                    end
+
+                    if trinket.Name == "Ring" then
+                        text.Visible = false
+                        text.Text = "Ring"
+                        text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
+                    end
+
+                    if trinket.Name == "Sapphire" then
+                        text.Visible = true
+                        text.Text = "Sapphire"
+                        text.Color = Color3.fromRGB(0, 0, 255)
+                    end
+                else
                     text.Visible = false
-                    text.Text = "Old Fragment"
-                    text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
-                end
-
-                if trinket.Name == "Ring" then
-                    text.Visible = false
-                    text.Text = "Ring"
-                    text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
-                end
-
-                if trinket.Name == "Sapphire" then
-                    text.Visible = true
-                    text.Text = "Sapphire"
-                    text.Color = Color3.fromRGB(0, 0, 255)
                 end
             else
                 text.Visible = false
+                update:Disconnect()
             end
         else
             text.Visible = false
@@ -180,60 +185,66 @@ local function trinketesp(trinket)
 
     local update
     update = game:GetService("RunService").RenderStepped:Connect(function()
-        if trinket and trinket:FindFirstChild("Handle") and _G.trinketEsp then
-            local vector, onscreen = currentCamera:WorldToViewportPoint(trinket.Handle.Position)
-            if onscreen then
-                text.Visible = true
-                text.Text = trinket.Handle.Parent.Name
-                text.Position = Vector2.new(vector.X, vector.Y)
-
-                text.Color = Color3.fromRGB(255, 0, 0)
-
-                if trinket.Name == "Scroll" then
-                    text.Text = "Scroll"
-                    text.Color = Color3.fromRGB(255, 250, 0)
-                end
-
-                if trinket.Name == "Amulet" then
-                    text.Visible = false
-                    text.Text = "Amulet"
-                    text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
-                end
-
-                if trinket.Name == "Emerald" then
+        if _G.trinketEsp then
+            if trinket and trinket:FindFirstChild("Handle") then
+                local vector, onscreen = currentCamera:WorldToViewportPoint(trinket.Handle.Position)
+                if onscreen then
                     text.Visible = true
-                    text.Text = "Emerald"
-                    text.Color = Color3.fromRGB(0, 255, 0)
-                end
+                    text.Text = trinket.Handle.Parent.Name
+                    text.Position = Vector2.new(vector.X, vector.Y)
 
-                if trinket.Name == "Ice Essence" then
-                    text.Text = "Ice Essence"
-                    text.Color = Color3.fromRGB(0, 255, 255)
-                end
+                    text.Color = Color3.fromRGB(255, 0, 0)
 
-                if trinket.Name == "Old Fragment" then
+                    if trinket.Name == "Scroll" then
+                        text.Visible = Toggles.tesp_scroll.Value
+                        text.Text = "Scroll"
+                        text.Color = Color3.fromRGB(255, 250, 0)
+                    end
+
+                    if trinket.Name == "Amulet" then
+                        text.Visible = Toggles.tesp_common.Value
+                        text.Text = "Amulet"
+                        text.Color = Color3.fromRGB(100, 100, 100)
+                    end
+
+                    if trinket.Name == "Emerald" then
+                        text.Visible = Toggles.tesp_gem.Value
+                        text.Text = "Emerald"
+                        text.Color = Color3.fromRGB(0, 255, 0)
+                    end
+
+                    if trinket.Name == "Ice Essence" then
+                        text.Visible = Toggles.tesp_scroll.Value
+                        text.Text = "Ice Essence"
+                        text.Color = Color3.fromRGB(0, 255, 255)
+                    end
+
+                    if trinket.Name == "Old Fragment" then
+                        text.Visible = Toggles.tesp_common.Value
+                        text.Text = "Old Fragment"
+                        text.Color = Color3.fromRGB(100, 100, 100)
+                    end
+
+                    if trinket.Name == "Ring" then
+                        text.Visible = Toggles.tesp_common.Value
+                        text.Text = "Ring"
+                        text.Color = Color3.fromRGB(100, 100,100)
+                    end
+
+                    if trinket.Name == "Sapphire" then
+                        text.Visible = Toggles.tesp_gem.Value
+                        text.Text = "Sapphire"
+                        text.Color = Color3.fromRGB(0, 0, 255)
+                    end
+                else
                     text.Visible = false
-                    text.Text = "Old Fragment"
-                    text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
-                end
-
-                if trinket.Name == "Ring" then
-                    text.Visible = false
-                    text.Text = "Ring"
-                    text.Color = Color3.fromRGB(0.3, 0.3, 0.3)
-                end
-
-                if trinket.Name == "Sapphire" then
-                    text.Visible = true
-                    text.Text = "Sapphire"
-                    text.Color = Color3.fromRGB(0, 0, 255)
                 end
             else
                 text.Visible = false
+                update:Disconnect()
             end
         else
             text.Visible = false
-            update:Disconnect()
         end
     end)
 end
@@ -243,19 +254,23 @@ local G_Esp = Tabs.Main:AddLeftGroupbox("ESP")
 G_Esp:AddLabel('Trinket ESP')
 G_Esp:AddToggle('trinketesptoggle', {
     Text = 'Enabled',
+    Default = true,
+})
+G_Esp:AddToggle('tesp_artifact', {
+    Text = 'Show Artifact',
+    Default = true,
+})
+G_Esp:AddToggle('tesp_scroll', {
+    Text = 'Show Scrolls',
+    Default = true,
+})
+G_Esp:AddToggle('tesp_gem', {
+    Text = 'Show Gems',
+    Default = true,
+})
+G_Esp:AddToggle('tesp_common', {
+    Text = 'Show Common',
     Default = false,
-})
-G_Esp:AddLabel('Artifact Color'):AddColorPicker('tesp_artifactcolor', {
-    Default = Color3.fromRGB(255, 0, 0),
-    Title = 'Artifact Color',
-})
-G_Esp:AddLabel('Gems color'):AddColorPicker('tesp_gemcolor', {
-    Default = Color3.fromRGB(100, 100, 0),
-    Title = 'Artifact Color',
-})
-G_Esp:AddLabel('Common trinket color'):AddColorPicker('tesp_commoncolor', {
-    Default = Color3.fromRGB(100, 100, 100),
-    Title = 'Artifact Color',
 })
 G_Esp:AddDivider()
 
@@ -368,9 +383,9 @@ Toggles.infmanatoggle:OnChanged(function()
 end)
 Toggles.trinketesptoggle:OnChanged(function()
     if Toggles.trinketesptoggle.Value then
-        _G.trinket = false
+        _G.trinketEsp = true
     else
-        _G.trinket = true
+        _G.trinketEsp = false
     end
 end)
 Options.discordwebhookinput:OnChanged(function()
@@ -379,33 +394,38 @@ end)
 Options.movementkeybind:OnClick(function()
     if Toggles.movementtoggle.Value then
         Toggles.movementtoggle:SetValue(false)
+        _G.movement = false
     else
         Toggles.movementtoggle:SetValue(true)
+        _G.movement = true
     end
 end)
 -------------------------------------- WHILE LOOP HANDLERS
 local connections = {}
 task.spawn(function()
-	while _G.loaded and wait() do
-		if Toggles.movementtoggle.Value then
-            local move = game.Players.LocalPlayer.Character.Humanoid.MoveDirection
-            local bodyvelo
-            if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"):FindFirstChild("movement") then
-                bodyvelo = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"):FindFirstChild("movement")
-                bodyvelo.Velocity = move * Options.movementspeed.Value
-            else
-                bodyvelo = Instance.new("BodyVelocity")
-                bodyvelo.Name = "movement"
-                bodyvelo.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-                bodyvelo.Velocity = move * Options.movementspeed.Value
-            end
-            if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
-                bodyvelo.Velocity = Vector3.new(bodyvelo.Velocity.X,-Options.movementspeed.Value,bodyvelo.Velocity.Z)
-            elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) then
-                bodyvelo.Velocity = Vector3.new(bodyvelo.Velocity.X,Options.movementspeed.Value,bodyvelo.Velocity.Z)
-            else
-                bodyvelo.Velocity = Vector3.new(bodyvelo.Velocity.X,0,bodyvelo.Velocity.Z)
-            end
+	while _G.loaded and task.wait() do
+		if _G.movement then
+            pcall(function()
+                local move = game.Players.LocalPlayer.Character.Humanoid.MoveDirection
+                local bodyvelo
+                repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"):FindFirstChild("movement") then
+                    bodyvelo = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"):FindFirstChild("movement")
+                    bodyvelo.Velocity = move * Options.movementspeed.Value
+                else
+                    bodyvelo = Instance.new("BodyVelocity")
+                    bodyvelo.Name = "movement"
+                    bodyvelo.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    bodyvelo.Velocity = move * Options.movementspeed.Value
+                end
+                if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+                    bodyvelo.Velocity = Vector3.new(bodyvelo.Velocity.X,-Options.movementspeed.Value,bodyvelo.Velocity.Z)
+                elseif game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Space) then
+                    bodyvelo.Velocity = Vector3.new(bodyvelo.Velocity.X,Options.movementspeed.Value,bodyvelo.Velocity.Z)
+                else
+                    bodyvelo.Velocity = Vector3.new(bodyvelo.Velocity.X,0,bodyvelo.Velocity.Z)
+                end
+            end)
         else
             pcall(function()
                 if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"):FindFirstChild("movement") then
@@ -417,7 +437,7 @@ task.spawn(function()
 end)
 task.spawn(function()
 	while _G.loaded and wait() do
-		if Toggles.trinketpicktoggle.Value then
+        if Toggles.trinketpicktoggle.Value then
             for i,v in pairs(game.Workspace.Items:GetDescendants()) do
                 if v.Name == "Click" then
                     if getdistance(v.Parent) <= 15 then
@@ -425,7 +445,7 @@ task.spawn(function()
                     end
                 end
             end
-		end
+        end
 	end
 end)
 task.spawn(function()
@@ -435,12 +455,14 @@ task.spawn(function()
 	        if v.Name == "Old Fragment"
 	        or v.Name == "Emerald"
 	        or v.Name == "Sapphire"
-	        or v.Name == "" -- Scroll
+	        or v.Name == "Scroll"
 	        or v.Name == "Amulet"
 	        or v.Name == "Ring" then
 	            return
 	        else
-	            post(v.Name)
+                if Toggles.discordwebhooktoggle.Value then
+	                post(v.Name)
+                end
 	        end
 	    end)
 	)
@@ -462,6 +484,8 @@ Library.KeybindFrame.Visible = false; -- todo: add a function for this
 Library:OnUnload(function()
     print('Unloaded!')
     _G.loaded = false
+    _G.movement = false
+    _G.trinketEsp = false
     for i,v in pairs(connections) do
         v:Disconnect()
     end
