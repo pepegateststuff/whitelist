@@ -6,6 +6,6 @@ local response = request({Url = gameLink; Method = "GET"})
 
 if response["Body"] == "true" then
 	xpcall(loadstring(game:HttpGet(gameLoader)), print)
-else
+elseif response["Body"] == "false" then
 	print("hub wont work")
 end
