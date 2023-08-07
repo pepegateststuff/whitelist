@@ -4,7 +4,7 @@ local gameLink = "https://pepegateststuff.000webhostapp.com/check_game.php?id=" 
 local request = syn and syn.request or request
 local response = request({Url = gameLink; Method = "GET"})
 
-if response["Body"] then
+if response["Body"] == "true" then
 	xpcall(loadstring(game:HttpGet(gameLoader)), print)
 else
 	print("hub wont work")
