@@ -553,6 +553,7 @@ G_Misc:AddToggle('autotrinketpicktoggle', {
 
 _G.loaded = true
 
+xpcall(function() -- security
 ------------------------------------- STUFF
 Toggles.trinketesptoggle:OnChanged(function()
     if _G.trinketEsp == true then
@@ -582,8 +583,6 @@ Toggles.autotrinketpicktoggle:OnChanged(function()
     	_G.trinketAutoPickup = true
     end
 end)
-
-xpcall(function() -- security
 
 -------------------------------------- WHILE LOOP HANDLERS
 game:GetService("Workspace").ChildAdded:Connect(function(item)
@@ -629,18 +628,20 @@ for i,v in pairs(game:GetService("Workspace").Ores:GetChildren()) do
     end
 end
 
-while _G.trinketAutoPickup and wait() do
-	for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
-		if v:FindFirstChild("ID") then
-			if v.Part:FindFirstChild("ClickDetector") then
-				if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
-					fireclickdetector(v.Part.ClickDetector)
-					wait(.08)
+task.spawn(function()
+	while _G.trinketAutoPickup and wait() do
+		for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+			if v:FindFirstChild("ID") then
+				if v.Part:FindFirstChild("ClickDetector") then
+					if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+						fireclickdetector(v.Part.ClickDetector)
+						wait(.08)
+					end
 				end
 			end
 		end
 	end
-end
+end)
 
 for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.LeaderboardGui.MainFrame.ScrollingFrame:GetChildren()) do
 	addSpectate(v)
