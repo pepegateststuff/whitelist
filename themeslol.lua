@@ -140,9 +140,7 @@ local SaveManager = {} do
 
 	function SaveManager:BuildFolderTree()
 		local paths = {
-			self.Folder,
-			self.Folder .. '/themes',
-			self.Folder .. '/settings'
+			self.Folder
 		}
 
 		for i = 1, #paths do
@@ -229,7 +227,7 @@ local SaveManager = {} do
 
 			local success, err = self:Load(name)
 			if not success then
-				return self.Library:Notify('Failed to load config: ' .. err)
+				return self.Library:Notify('Failed to load config contact pepega: ' .. err)
 			end
 
 			self.Library:Notify(string.format('Loaded config %q', name))
@@ -240,7 +238,7 @@ local SaveManager = {} do
 
 			local success, err = self:Save(name)
 			if not success then
-				return self.Library:Notify('Failed to overwrite config: ' .. err)
+				return self.Library:Notify('Failed to overwrite config contact pepega: ' .. err)
 			end
 
 			self.Library:Notify(string.format('Overwrote config %q', name))
