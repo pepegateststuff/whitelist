@@ -79,14 +79,14 @@ local function iesp(ingredient)
 	
     local update
     update = game:GetService("RunService").RenderStepped:Connect(function()
-        if _G.ingredientEsp and ingredient:FindFirstChild("ClickDetector") then
+        if ingredient:FindFirstChild("ClickDetector") then
             local vector, onscreen = currentCamera:WorldToViewportPoint(ingredient.Position)
 
 	    	text.Size = _G.ingredientSize
     	    text.Font = _G.ingredientFont
 
             if onscreen then
-                text.Visible = true
+                text.Visible = _G.ingredientEsp
                 text.Text = ingredient.Name
                 text.Position = Vector2.new(vector.X, vector.Y)
                 text.Color = ingredient.Color
@@ -163,10 +163,10 @@ local function oreesp(trinket)
 	
     local update
     update = game:GetService("RunService").RenderStepped:Connect(function()
-        if trinket and _G.oreEsp and trinket.OreLife.Value > 0 then
+        if trinket and trinket.OreLife.Value > 0 then
             local vector, onscreen = currentCamera:WorldToViewportPoint(trinket.Position)
             if onscreen then
-                text.Visible = true
+                text.Visible = _G.oreEsp
                 text.Text = trinket.Name
                 text.Position = Vector2.new(vector.X, vector.Y)
                 text.Color = Color3.fromRGB(255, 255, 255)
@@ -230,14 +230,14 @@ local function trinketesp(trinket)
 	
     local update
     update = game:GetService("RunService").RenderStepped:Connect(function()
-        if trinket and _G.trinketEsp and trinket:FindFirstChild("ID") then
+        if trinket and trinket:FindFirstChild("ID") then
             local vector, onscreen = currentCamera:WorldToViewportPoint(trinket.Position)
             
             text.Size = _G.trinketSize
     		text.Font = _G.trinketFont
             
             if onscreen then
-                text.Visible = true
+                text.Visible = _G.trinketEsp
                 text.Text = "Part"
                 text.Position = Vector2.new(vector.X, vector.Y)
                 text.Color = Color3.fromRGB(255, 255, 255)
