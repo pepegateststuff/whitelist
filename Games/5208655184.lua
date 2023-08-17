@@ -507,6 +507,7 @@ G_OreEsp:AddSlider('oreespfont', {
     Compact = false, -- If set to true, then it will hide the label
 })
 ------------------------- MOVEMENT
+--[[
 local G_Move = Tabs.Movement:AddRightGroupbox("Flight")
 G_Move:AddToggle('movementtoggle', {
     Text = 'Enabled',
@@ -539,6 +540,7 @@ G_Move:AddLabel('Keybind'):AddKeyPicker('movementkeybind', {
     Text = 'Keybind', -- Text to display in the keybind menu
     NoUI = true, -- Set to true if you want to hide from the Keybind menu,
 })
+]]
 
 
 ------------------------- MISC
@@ -644,7 +646,7 @@ for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.LeaderboardGui
 	addSpectate(v)
 end
 
-end)
+end, print)
 
 
 Library.KeybindFrame.Visible = false; -- todo: add a function for this
