@@ -5,7 +5,7 @@ local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
 local Window = Library:CreateWindow({
-    Title = 'Kold Hub',
+    Title = 'kold',
     Center = true, 
     AutoShow = true,
 })
