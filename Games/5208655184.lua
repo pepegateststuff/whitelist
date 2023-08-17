@@ -1,5 +1,4 @@
 xpcall(function()
-
 local repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/pepegateststuff/whitelist/main/testinglol.lua'))()
@@ -38,6 +37,8 @@ _G.playerEspColor = Color3.fromRGB(150,100,240)
 
 -- // Trinket Auto Pickup
 _G.trinketAutoPickup = false
+
+warn("update - 0.1a")
 
 local currentCamera = workspace.CurrentCamera
 
@@ -652,6 +653,10 @@ end, print)
 Library.KeybindFrame.Visible = false; -- todo: add a function for this
 Library:OnUnload(function()
     print('Unloaded!')
+    _G.trinketEsp = false
+    _G.oreEsp = false
+    _G.ingredientEsp = false
+    _G.playerEsp = false
     Library.Unloaded = true
 end)
 
