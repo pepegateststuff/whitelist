@@ -32,6 +32,10 @@ _G.trinketArtifactColor = Color3.fromRGB(255,0,0)
 _G.trinketFont = 3
 _G.trinketSize = 13
 
+-- // Player ESP
+_G.playerEsp = true
+_G.playerEspColor = Color3.fromRGB(150,100,240)
+
 -- // Trinket Auto Pickup
 _G.trinketAutoPickup = false
 
@@ -372,7 +376,6 @@ local function trinketesp(trinket)
     end)
 end
 
--- You do not have to set your tabs & groups up this way, just a prefrence.
 local Tabs = {
     -- Creates a new tab titled Main
     --Player = Window:AddTab('Player'), 
@@ -383,13 +386,9 @@ local Tabs = {
     --BotFarm = Window:AddTab('Farming'), 
     ['UI Settings'] = Window:AddTab('UI Settings'),
 }
-
--- Groupbox and Tabbox inherit the same functions
--- except Tabboxes you have to call the functions on a tab (Tabbox:AddTab(name))
 local currentCamera = workspace.CurrentCamera
 local rs = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
-
 ------------------------- VISUAL
 local G_PlayerEsp = Tabs.Visual:AddLeftGroupbox("PLAYER ESP")
 G_PlayerEsp:AddToggle('playeresptoggle', {
@@ -404,7 +403,7 @@ G_PlayerEsp:AddSlider('playerespsize', {
     Max = 20,
     Rounding = 0,
 
-    Compact = false, -- If set to true, then it will hide the label
+    Compact = false,
 })
 G_PlayerEsp:AddSlider('playerespfont', {
     Text = 'Text Font',
@@ -414,11 +413,11 @@ G_PlayerEsp:AddSlider('playerespfont', {
     Max = 3,
     Rounding = 0,
 
-    Compact = false, -- If set to true, then it will hide the label
+    Compact = false,
 })
 G_PlayerEsp:AddLabel('Color'):AddColorPicker('playerespcolor', {
-    Default = Color3.fromRGB(150, 50, 200), -- Bright green
-    Title = 'Player Esp Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Default = Color3.fromRGB(150,100,240),
+    Title = 'Player Esp Color',
 })
 
 local G_TrinketEsp = Tabs.Visual:AddLeftGroupbox("TRINKET ESP")
